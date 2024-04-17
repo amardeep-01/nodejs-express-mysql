@@ -92,7 +92,7 @@ jobs:
           echo "Environment: $ENV"
           if ($ENV -eq "DEV") {
             Get-ChildItem -Path "C:\Dev_Environment\Node_api" | Remove-Item -Recurse -Force
-            # Copy-Item -Path "C:\Users\Administrator\actions-runner\_work\nodejs-express-mysql\nodejs-express-mysql\*" -Destination "C:\Dev_Environment\Node_api"  -Recurse -Force
+            Copy-Item -Path "C:\Users\Administrator\actions-runner\_work\nodejs-express-mysql\nodejs-express-mysql\*" -Destination "C:\Dev_Environment\Node_api"  -Recurse -Force
 
                }
           # elseif ($ENV -eq "QA") {
