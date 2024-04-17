@@ -90,7 +90,7 @@ jobs:
           if ($ENV -eq "DEV") {
             Get-ChildItem -Path "C:\Dev_Environment\Node_api" | Remove-Item -Recurse -Force
             Copy-Item -Path "C:\Users\Administrator\actions-runner\_work\nodejs-express-mysql\nodejs-express-mysql\*" -Destination "C:\Dev_Environment\Node_api"  -Recurse -Force
-               npm run build
+
                }
           # elseif ($ENV -eq "QA") {
           #  mvn clean package
