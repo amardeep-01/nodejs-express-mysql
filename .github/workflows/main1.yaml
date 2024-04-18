@@ -79,10 +79,8 @@ jobs:
        - name: Stop running node process
          shell: cmd
          run: |
-          @echo off
-          echo Stopping running Java process...
-          tasklist | find "node.exe"
-          echo Java process stopped.
+           tasklist | find "node.exe"
+            echo node process stopped.
 
           
        - name: Deleting
