@@ -79,7 +79,8 @@ jobs:
        - name: Stop running node process
          shell: cmd
          run: |
-           tasklist | find "node.exe"
+           
+           for /f "tokens=5" %i in ('netstat -ano ^| findstr "LISTENING" ^| findstr ":8080"') do taskkill /F /PID %i
             echo node process stopped.
 
           
