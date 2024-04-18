@@ -1,5 +1,4 @@
-process.title = "MyNodeApp";
-process.env.NODE_APP_NAME = 'MyApp';
+const appNameToFind = 'MyApp';
 //demo
 const express = require("express");
 // const bodyParser = require("body-parser"); /* deprecated */
