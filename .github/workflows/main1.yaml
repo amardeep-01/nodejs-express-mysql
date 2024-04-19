@@ -84,7 +84,9 @@ jobs:
           
           REM Find the PID of the Node.js process based on the port number
           for /f "tokens=1,2,3" %%a in ('netstat -aon ^| findstr /R "\<%Port%\>"') do (
-              set "PID=%%c"
+              if not "%%c" == "0" (
+                  set "PID=%%c"
+              )
           )
           
           if not defined PID (
