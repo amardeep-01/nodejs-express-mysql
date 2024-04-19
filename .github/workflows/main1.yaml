@@ -80,20 +80,21 @@ jobs:
          shell: cmd
          run: |
           @echo off
-          set "AppName=myapp"
+          set "Port=8080"
           
-          REM Find the PID of the Node.js process based on the application name
-          for /f "tokens=2" %%a in ('tasklist /fi "imagename eq node.exe" /v /fo list ^| findstr /i /c:"%AppName%"') do (
+          REM Find the PID of the Node.js process based on the port number
+          for /f "tokens=2" %%a in ('netstat -aon ^| findstr /R "\<%Port%\>"') do (
               set "PID=%%a"
           )
           
           if not defined PID (
-              echo No process found with the name %AppName%
+              echo No process found running on port %Port%
           ) else (
               REM Terminate the process
               taskkill /F /PID %PID%
-              echo Process %PID% terminated
+              echo Process %PID% running on port %Port% terminated
           )
+
 
           
        - name: Deleting
