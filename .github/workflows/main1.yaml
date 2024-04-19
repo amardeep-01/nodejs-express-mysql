@@ -77,28 +77,19 @@ jobs:
           # )
 
        - name: Stop running node process
-         shell: cmd
+         shell: powershell
          run: |
-          @echo off
-          set "Port=8080"
-          
-          REM Find the PID of the Node.js process based on the port number
-          for /f "tokens=1,2,3" %%a in ('netstat -aon ^| findstr /R "\<%Port%\>"') do (
-              if not "%%c" == "0" (
-                  tasklist /FI "PID eq %%c" | findstr /C:"node.exe" >nul
-                  if not errorlevel 1 (
-                      set "PID=%%c"
-                  )
-              )
-          )
-          
-          if not defined PID (
-              echo No Node.js process found running on port %Port%
-          ) else (
-              REM Terminate the process
-              taskkill /F /PID %PID%
-              echo Node.js process with PID %PID% running on port %Port% terminated
-          )
+          $processes = Get-Process -Name "node" -ErrorAction SilentlyContinue | Where-Object { (Get-NetTCPConnection -OwningProcess $_.Id | Where-Object { $_.LocalAddress -eq "::" }).LocalPort -eq 8080 }
+            
+            if ($processes) {
+                foreach ($process in $processes) {
+                    Stop-Process -Id $process.Id -Force
+                    Write-Output "Node.js process with PID $($process.Id) running on port 8080 terminated"
+                }
+            } else {
+                Write-Output "No Node.js process found running on port 8080."
+            }
+
 
        - name: Deleting
          run: |
