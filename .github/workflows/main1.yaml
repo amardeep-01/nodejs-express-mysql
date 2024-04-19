@@ -81,12 +81,12 @@ jobs:
          run: |
           @echo off
           set "AppName=myapp"
-           
+          
           REM Find the PID of the Node.js process based on the application name
-          for /f "tokens=2" %%a in ('tasklist /fi "imagename eq node.exe" /v /fo list ^| findstr /i /c:"$AppName"') do (
+          for /f "tokens=2" %%a in ('tasklist /fi "imagename eq node.exe" /v /fo list ^| findstr /i /c:"%AppName%"') do (
               set "PID=%%a"
           )
- 
+          
           if not defined PID (
               echo No process found with the name %AppName%
           ) else (
