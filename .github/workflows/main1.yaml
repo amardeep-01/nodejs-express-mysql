@@ -141,4 +141,4 @@ jobs:
           if !second! lss 10 set "second=0!second!"
           
           REM Create the scheduled task
-          SCHTASKS /CREATE /tn node_js /tr "\"C:\Dev_Environment\Node_api\node.bat\"" /sc once /st !hour!:!minute!:!second! /sd !date! /F
+          SCHTASKS /CREATE /tn node_js /tr "\"C:\Dev Environment\Node_api\node.bat"" /sc once /st !hour!:!minute!:!second! /sd !date! /F
