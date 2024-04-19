@@ -77,7 +77,7 @@ jobs:
           # )
 
        - name: Stop running node process
-          shell:cmd
+         shell: cmd
          run: |
           @echo off
           set "AppName=myapp"
